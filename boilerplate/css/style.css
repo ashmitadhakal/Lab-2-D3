@@ -3,6 +3,7 @@
 .map {
     border: medium solid #999;
     margin: 10px 0 0 20px;
+    background-color: rgba(128,128,128,.2) ;
 }
 .regions{
     stroke: #000;
@@ -11,9 +12,9 @@
 }
 .mapTitle {
     font-family: sans-serif;
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: bold;
-    fill: #414040;
+    fill: #8b8a8a;
 }
 .numbers {
     fill: rgb(16, 16, 16);
@@ -28,9 +29,10 @@
 
 .chartTitle {
     font-family: sans-serif;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
-    fill: #636363;
+    fill: #8b8a8a;
+    white-space: pre-line;
 }
 
 .chartBackground {

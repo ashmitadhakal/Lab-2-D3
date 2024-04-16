@@ -16,7 +16,7 @@
     "Grade11",
     "Grade12",
   ];
-  var expressed = attrArray[11]; //initial attribute
+  var expressed = attrArray[10]; //initial attribute
   
   //chart frame dimensions
   var chartWidth = window.innerWidth * 0.425,
@@ -30,7 +30,7 @@
 
   //create a scale to size bars proportionally to frame and for axis
   var yScale = d3.scaleLinear()
-    .range([463, 0]).domain([0, 6000]);
+    .range([463, 0]).domain([0, 10]);
 
   //begin script when window loads
   window.onload = setMap();
@@ -61,7 +61,7 @@
 
     //use Promise.all to parallelize asynchronous data loading
     var promises = [
-      d3.csv("data/enrollment.csv"),
+      d3.csv("data/enrollments.csv"),
       d3.json("data/Districts.topojson"),
       d3.json("data/province.topojson"),
     ];
@@ -101,16 +101,38 @@
       setEnumerationUnits(nepalDistricts, map, path, colorScale);
       setChart(csvData, colorScale);
       createDropdown(csvData);
+      
       var mapTitle = map
       .append("text")
-      .attr("x", 160)
+      .attr("x", 200)
       .attr("y", 60)
       .attr("class", "mapTitle")
       .text(
-        "Number of Students Enrollments in " +
-          attrArray[11] +
-          " in Central Region of Nepal"
+        "Enrollment Percentage of Students in " +
+          attrArray[10]
       );
+
+      mapTitle.append("tspan")
+              .text(" in Different Districts of Central Nepal")
+              .attr("x", 300)
+              .attr("y", 80)
+              .attr("dy", 15); // Position of the second line
+/*
+      var mapTitle = d3.select(".mapTitle")
+      .text("Enrollment Percentage of Students in " + expressed)
+      .attr("x", 250)
+      .attr("y", 40)
+      .attr("dy", 0); // Position of the first line
+
+mapTitle.append("tspan")
+.text("in Different Districts of Central Nepal")
+.attr("x", 350)
+.attr("y", 60)
+.attr("dy", 15); // Position of the second line
+}
+*/
+
+
     }
   }
 
@@ -271,14 +293,12 @@
       //create a text element for the chart title
       var chartTitle = chart
         .append("text")
-        .attr("x", 110)
+        .attr("x", 50)
         .attr("y", 40)
         .attr("class", "chartTitle")
         .text(
-          "Number of enrollments in " +
-            attrArray[3] +
-            " in central region of Nepal"
-        );
+          "Coordinated Visualization of Enrollment Percentage in "  +
+            attrArray[10]);
       //create vertical axis generator
       var yAxis = d3.axisLeft().scale(yScale).ticks(10);
 
@@ -413,7 +433,21 @@
           }
         });
       var chartTitle = d3.select(".chartTitle")
-        .text("Number of enrollment of students in " + expressed + " in each districts");
+        .text("Coordinated Visualization of Enrollment Percentage in " +
+          expressed);
+      
+      var mapTitle = d3.select(".mapTitle")
+        .text("Enrollment Percentage of Students in " + expressed)
+        .attr("x", 200)
+        .attr("y", 60)
+        .attr("dy", 0); // Position of the first line
+
+      mapTitle.append("tspan")
+      .text("in Different Districts of Central Nepal")
+      .attr("x", 300)
+      .attr("y", 80)
+      .attr("dy", 15); // Position of the second line
+
     }
 
     //function to highlight enumeration units and bars
@@ -449,7 +483,7 @@
     };
     function setLabel(props){
       //label content
-      var labelAttribute = "<h1>" + props[expressed] +
+      var labelAttribute = "<h1>" + props[expressed] + "%"+
           "</h1><b>" + expressed + "</b>";
 
       //create info label div
