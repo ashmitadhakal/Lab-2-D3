@@ -67,7 +67,7 @@
 
 .countries {
     fill: #FFF;
-    stroke: #CCC;
+    stroke: #191818;
     stroke-width: 2px;
 }
 
@@ -114,4 +114,17 @@
     padding: 0;
     display: inline-block;
     line-height: 1em;
+}
+
+.text {
+    position: fixed; /* Fixed positioning */
+    bottom: 0; /* Position at the bottom */
+    left: 0; /* Position at the left */
+    margin: 2px 2px 0 0; /* Adjust margins as needed */
+}
+
+.mapInfo{
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
 }

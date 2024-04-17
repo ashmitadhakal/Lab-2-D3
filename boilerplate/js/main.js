@@ -38,7 +38,7 @@
   //set uo chloropleth map
   function setMap() {
     //map frame dimensions
-    var width = window.innerWidth * 0.45,
+    var width = window.innerWidth * 0.425,
       height = 473;
 
     //create new svg container for map
@@ -99,6 +99,7 @@
         
       //add enumeration units to the map
       setEnumerationUnits(nepalDistricts, map, path, colorScale);
+      
       setChart(csvData, colorScale);
       createDropdown(csvData);
       
@@ -117,21 +118,7 @@
               .attr("x", 300)
               .attr("y", 80)
               .attr("dy", 15); // Position of the second line
-/*
-      var mapTitle = d3.select(".mapTitle")
-      .text("Enrollment Percentage of Students in " + expressed)
-      .attr("x", 250)
-      .attr("y", 40)
-      .attr("dy", 0); // Position of the first line
-
-mapTitle.append("tspan")
-.text("in Different Districts of Central Nepal")
-.attr("x", 350)
-.attr("y", 60)
-.attr("dy", 15); // Position of the second line
-}
-*/
-
+      
 
     }
   }
@@ -370,7 +357,7 @@ mapTitle.append("tspan")
       //recolor enumeration units
       var regions = d3.
         selectAll(".regions").
-        transition().duration(1000).
+        transition().duration(700).
         style("fill", function (d) {
           var value = parseFloat(d.properties[expressed]);
           if (!isNaN(value)) {
@@ -521,4 +508,48 @@ mapTitle.append("tspan")
         .style("top", y + "px");
       };
   
+
+
+      
 })();
+function setText() {    
+  //create new svg container for map
+  var textBox = d3
+    .select("body")
+    .append("svg")
+    .attr("class", "textBox")
+    .attr("width", 1000)
+    .attr("height", 300)
+    .style("position", "absolute")
+    .attr("class", "text") //assign a class name
+    .style("background-color", "rgba(0,0,0,0.2)"); //svg background color
+
+  //innerRect block
+  var innerRect = textBox.append("rect") //put a new rect in the svg
+    .attr("width", 950) //rectangle width
+    .attr("height", 275) //rectangle height
+    .attr("class", "innerRect") //class name
+    .attr("x", 15) //position from left on the x (horizontal) axis
+    .attr("y", 12) //position from top on the y (vertical) axis
+    .style("fill", "#FFFFFF"); //fill color
+  
+  var info = "<h3><b><u>About the Interface: </u></b></h3>"+
+               "This is a visualization for percentage enrollment of students in different grades\n"+
+               " for districts in Bagmati and Madesh provinces of Nepal. There are all together 21 districts and \n"+
+               "attribute values for grades 1 to 12. The data for enrollment number is of 2011 and was harvested from \n"+
+               " Ministry of Nepal by <a href = 'https://opendatanepal.com/dataset/total-number-of-enrollment-at-all-levels-by-district-year-2011-012' target='_blank'/n"+
+               "</a>Open Data Nepal.</a></p>" +
+               "<p>From the visualization it can be seen that the Kathmandu district, which is the capital city of Nepal \n"+
+               "had the most enrollment of students in every grades except for grade 1 and 12 and Rasuwa district which is a remote \n"+
+               "district in himalayan region of Nepal has less than 1% enrollment of students in all the grades \n"+
+               "<h4><b>Author : Ashmita Dhakal </b></h3>\n" +
+               "<p><i>*This interactive map is created as a lab 2 assignment for GEOG 575 course in my MS GIS/Carto</i>\n"
+  var mapInfo = textBox.append("foreignObject")
+                        .attr("class", "mapInfo")
+                        .attr("width", 900)
+                        .attr("height", 270)
+                        .attr("x", 20)
+                        .attr("y", 1)
+                        .html(info);
+ }
+  setText()
