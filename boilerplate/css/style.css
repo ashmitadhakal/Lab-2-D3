@@ -12,9 +12,9 @@
 }
 .mapTitle {
     font-family: sans-serif;
-    font-size: 1.3em;
+    font-size: 1.05em;
     font-weight: bold;
-    fill: #8b8a8a;
+    fill: #4b4b4b;
 }
 .numbers {
     fill: rgb(16, 16, 16);
@@ -29,9 +29,9 @@
 
 .chartTitle {
     font-family: sans-serif;
-    font-size: 1.3em;
+    font-size: 1.05em;
     font-weight: bold;
-    fill: #8b8a8a;
+    fill: #4b4b4b;
     white-space: pre-line;
 }
 
@@ -117,14 +117,22 @@
 }
 
 .text {
-    position: fixed; /* Fixed positioning */
+    position: float; /* Fixed positioning */
     bottom: 0; /* Position at the bottom */
     left: 0; /* Position at the left */
     margin: 2px 2px 0 0; /* Adjust margins as needed */
 }
+.innerRect {
+    fill: #efedf5; /* Fill color of the inner rectangle */
+}
+
+.closeButton {
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
 
 .mapInfo{
     font-family: sans-serif;
-    font-size: 1em;
+    font-size: 15px;
     font-weight: bold;
+    fill: #252424;
 }
