@@ -53,8 +53,8 @@
     var projection = d3
       .geoAlbers()
       .center([1.1, 27.8])
-      .rotate([-84.5, -0.3, 0])
-      .parallels([26.8, 29.88])
+      .rotate([-84.7, -0.2, 0])
+      .parallels([26, 29])
       .scale(7500)
       .translate([width / 2.1, height / 2]);
     var path = d3.geoPath().projection(projection);
@@ -104,7 +104,7 @@
       
       var mapTitle = map
       .append("text")
-      .attr("x", 130)
+      .attr("x", 185)
       .attr("y", 60)
       .attr("class", "mapTitle")
       .text(
@@ -115,7 +115,7 @@
       mapTitle.append("tspan")
               .text(" in Different Districts of Central Nepal")
               .attr("x", 200)
-              .attr("y", 70)
+              .attr("y", 65)
               .attr("dy", 15); // Position of the second line
 
     }
@@ -421,14 +421,14 @@
           expressed);
       
       var mapTitle = d3.select(".mapTitle")
-        .attr("x", 130)
+        .attr("x", 185)
         .attr("y", 60)
         .text("Enrollment Percentage of Students in " + expressed)
         .attr("dy", 0); // Position of the first line
 
       mapTitle.append("tspan")
       .attr("x", 200)
-      .attr("y", 70)
+      .attr("y", 65)
       .text("in Different Districts of Central Nepal")
       .attr("dy", 15); // Position of the second line
 
