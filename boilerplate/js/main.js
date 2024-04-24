@@ -395,7 +395,6 @@
           return i*20
         })
         updateChart(bars, csvData.length, colorScale);
-        updateLegend(colorScale)
     };
     function updateChart(bars, n, colorScale){
       bars.attr("x", function (d, i) {
@@ -422,13 +421,13 @@
           expressed);
       
       var mapTitle = d3.select(".mapTitle")
-        .attr("x", 100)
+        .attr("x", 130)
         .attr("y", 60)
         .text("Enrollment Percentage of Students in " + expressed)
         .attr("dy", 0); // Position of the first line
 
       mapTitle.append("tspan")
-      .attr("x", 140)
+      .attr("x", 200)
       .attr("y", 70)
       .text("in Different Districts of Central Nepal")
       .attr("dy", 15); // Position of the second line
