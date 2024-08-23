@@ -582,7 +582,7 @@ function setText() {
  }
  
 
- function setText2() {   
+ function addText() {   
   //create new svg container for map
   var textBox = d3
                 .select("body")
@@ -612,5 +612,5 @@ function setText() {
                         .attr("y", -5)
                         .html(info);
  }
- setText2()
+ addText()
  setText()
