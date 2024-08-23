@@ -6,8 +6,8 @@
     background-color: rgba(128,128,128,.2) ;
 }
 .regions{
-    stroke: #000;
-    stroke-width: 0.5px;
+    stroke: #2f2e2e;
+    stroke-width: 0.4px;
     font-weight: bold;
 }
 .mapTitle {
@@ -21,10 +21,19 @@
     font-family: sans-serif;
     font-size: 1em;
 }
-
+.boundary {
+    fill: none;
+    stroke: #191818; /* Or any color you want for the boundary */
+    stroke-width: 1px;
+  }
+  .countries {
+    fill: #FFF;
+    stroke: #191818;
+    stroke-width: 1.5px;
+}
 .chart {
     float: right;
-    margin: 7px 20px 0 0;
+    margin:10px 0 0 20px;
 }
 
 .chartTitle {
@@ -63,12 +72,6 @@
     font-family: sans-serif;
     font-size: 1.5em;
     font-weight: bold;
-}
-
-.countries {
-    fill: #FFF;
-    stroke: #191818;
-    stroke-width: 2px;
 }
 
 .gratLines {
@@ -131,8 +134,7 @@
 }
 
 .mapInfo{
-    font-family: sans-serif;
-    font-size: 15px;
-    font-weight: bold;
+    font-family: calibri;
+    font-size: 16.8px;
     fill: #252424;
 }

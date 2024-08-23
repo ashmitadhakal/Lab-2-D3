@@ -92,12 +92,18 @@
 
       //join csv data to GeoJson enumeration units
       nepalDistricts = joinData(nepalDistricts, csvData);
-
+      
       //create the color scale
       var colorScale = makeColorScale(csvData);
         
       //add enumeration units to the map
       setEnumerationUnits(nepalDistricts, map, path, colorScale);
+        //add boundary overlay to the map (line)
+      var boundary = map
+        .append("path")
+        .datum(topojson.mesh(data[2], data[2].objects.province, function(a, b) { return a !== b; }))
+        .attr("class", "boundary")
+        .attr("d", path);
 
       setChart(csvData, colorScale);
       createDropdown(csvData);
@@ -113,7 +119,7 @@
       );
 
       mapTitle.append("tspan")
-              .text(" in Different Districts of Central Nepal")
+              .text(" Across Various Districts in the Central Nepal")
               .attr("x", 200)
               .attr("y", 65)
               .attr("dy", 15); // Position of the second line
@@ -278,7 +284,7 @@
       //create a text element for the chart title
       var chartTitle = chart
         .append("text")
-        .attr("x", 50)
+        .attr("x", 100)
         .attr("y", 40)
         .attr("class", "chartTitle")
         .text(
@@ -429,7 +435,7 @@
       mapTitle.append("tspan")
       .attr("x", 200)
       .attr("y", 65)
-      .text("in Different Districts of Central Nepal")
+      .text("Across Various Districts in the Central Nepal")
       .attr("dy", 15); // Position of the second line
 
     }
@@ -505,64 +511,106 @@
         .style("top", y + "px");
       };      
 })();
-function setText() {    
+function setText() {   
   //create new svg container for map
   var textBox = d3
                 .select("body")
                 .append("svg")
                 .attr("class", "textBox")
                 .attr("width", 1100)
-                .attr("height", 500)
+                .attr("height", 550)
                 .style("position", "absolute")
                 .attr("class", "text") //assign a class name
                 .style("background-color", "rgba(0,0,0,0.2)"); //svg background color
 
   //innerRect block
   var innerRect = textBox.append("rect") //put a new rect in the svg
-                        .attr("width", 900) //rectangle width
-                        .attr("height", 370) //rectangle height
+                        .attr("width", 1050) //rectangle width
+                        .attr("height", 523) //rectangle height
                         .attr("class", "innerRect") //class name
-                        .attr("x", 90) //position from left on the x (horizontal) axis
-                        .attr("y", 60) //position from top on the y (vertical) axis
+                        .attr("x", 25) //position from left on the x (horizontal) axis
+                        .attr("y", 20) //position from top on the y (vertical) axis
   
-  var info = "<h3><b><u>About the Interface: </u></b></h3>"+
-               "This is a visualization for percentage enrollment of students in different grades\n"+
-               " for districts in Bagmati and Madesh provinces of Nepal. There are all together 21 districts and \n"+
-               "attribute values for grades 1 to 12. The data for enrollment number is of 2011 and was harvested from \n"+
-               " Ministry of Nepal by <a href = 'https://opendatanepal.com' target='_blank'>Open Data Nepal.</a></p>" +
-               "<p>While browsing the map, notice that the Kathmandu district, which is the capital city of Nepal \n"+
-               "had the most enrollment of students in every grades except for grade 1 and 12 and Rasuwa district which is a remote \n"+
-               "district in himalayan region of Nepal has less than 1% enrollment of students in all the grades. \n"+
-               "<p><i>*This interactive map is created as a lab 2 assignment for GEOG 575 course.</i>\n" +
-               "<h4><b>Author : Ashmita Dhakal </b>(Graduate Student - <i> MS GIS/Cartography, UW - Madison)</i></h3>\n"
+  var info = "<h3 style=\"text-align: center;\"><b><u>About the Map: </u></b></h3>"+
+               "<p>This interactive map visualizes the percentage enrollment of students across various districts in the central part of Nepal, " +
+               "specifically within the Bagmati and Madesh provinces, with a focus on different grade levels from Grade 1 to Grade 12. " +
+               "The map encompasses a total of 21 districts. The enrollment data is from 2011 and was sourced from the Ministry of Education, " +
+               "and made available by <a href='https://opendatanepal.com' target='_blank'>Open Data Nepal.</a></p>" +
+               "<p>As you explore the map, you’ll notice that Kathmandu, the capital city of Nepal, consistently shows the highest enrollment percentages " +
+               "across almost all grades, particularly from Grade 7 onwards. Notably, for Grade 9 and Grade 10, enrollment peaks at over 17%. " +
+               "Conversely, Rasuwa, a remote district in the Himalayan region, reports less than 1% enrollment across all grades, reflecting its isolated geography.</p>" +
+               "<p>Rautahat stands out with an exceptionally high enrollment in Grade 12, reaching 10.91%, though the enrollment for earlier grades fluctuates, " +
+               "with a peak in Grade 11 at 7.18%. Sarlahi exhibits a high enrollment in Grade 1 (10.41%), but sees a steady decline as students progress through " +
+               "the grades, dropping to 4.76% by Grade 12. This trend may suggest retention issues as students advance through the education system. Mahottari district " +
+               "follows a similar pattern.</p>" +
+               "<p>Overall, the map highlights significant disparities in student enrollment between districts and across different grade levels. " +
+               "Kathmandu, Rautahat, and Sarlahi are notable outliers in terms of high enrollment, contrasting sharply with low-enrollment districts like Rasuwa. " +
+               "One potential factor for fluctuating enrollment is migration, as people often move to districts like Kathmandu, Bhaktapur, Lalitpur, and Chitwan for better education opportunities." +
+               "Population size also plays a significant role in these enrollment figures. Districts in Madesh province and Kathmandu valley with higher populations, like Kathmandu, tend to have higher enrollment percentages. In contrast, districts with smaller populations, such as Rasuwa, often have lower enrollment percentages."+
+               "These disparities provide a clear illustration of both educational engagement and retention challenges across different regions of Nepal.</p>" +
+               "<p style=\"font-size: 15px;\"><b>Author : Ashmita Dhakal </b>(Graduate Student - <i> MS GIS/Cartography, University of Wisconsin - Madison) </i></p>"+
+               "<p style=\"text-align: right;font-size: 12px\"><i>Date: August 23, 2024 </i></p>";
   var mapInfo = textBox.append("foreignObject")
                         .attr("class", "mapInfo")
-                        .attr("width", 850)
-                        .attr("height", 380)
-                        .attr("x", 110)
-                        .attr("y", 90)
+                        .attr("width", 1000)
+                        .attr("height", 536)
+                        .attr("x", 40)
+                        .attr("y", 6)
                         .html(info);
   // Add close button
   var closeButton = textBox.append("rect")
                           .attr("class", "closeButton")
                           .attr("width", 20)
                           .attr("height", 20)
-                          .attr("x", 1065)
-                          .attr("y", 10)
+                          .attr("x", 1080)
+                          .attr("y", 1)
                           .style("fill", "red")
                           .style("cursor", "pointer") // Change cursor to pointer on hover
                           .on("click", function(){
                             textBox.remove();
                           })
   var closeButtonText = textBox.append("text")
-                              .attr("x", 1070)
-                              .attr("y", 23)
+                              .attr("x", 1084)
+                              .attr("y", 17)
                               .style("fill", "white")
-                              .style("font-size", "14px")
+                              .style("font-size", "18px")
                               .style("cursor", "pointer") // Change cursor to pointer on hover
                               .text("X")
                               .on("click", function() {
                                 textBox.remove(); // Hide the text box when "X" is clicked
                               });
  }
+ 
+
+ function setText2() {   
+  //create new svg container for map
+  var textBox = d3
+                .select("body")
+                .append("svg")
+                .attr("class", "textBox")
+                .attr("width", window.innerWidth)
+                .attr("height", 30)
+                .style("position", "absolute")
+                .attr("class", "text") //assign a class name
+                .style("background-color", "rgba(0,0,0,0.2)"); //svg background color
+
+  //innerRect block
+  var innerRect = textBox.append("rect") //put a new rect in the svg
+                        .attr("width", window.innerWidth*0.7) //rectangle width
+                        .attr("height", 40) //rectangle height
+                        .attr("class", "innerRect") //class name
+                        .attr("x", 190) //position from left on the x (horizontal) axis
+                        .attr("y", 0) //position from top on the y (vertical) axis
+  
+  var info = "<p style=\"font-size: 13px\";><b>Author: Ashmita Dhakal</b> (Graduate Student - <i>MS GIS/Cartography, UW - Madison)</i> ; "+
+            "<b> Data Sources: </b> <a href='https://download.hermes.com.np/' target='_blank'>Hermes Engineering Solution</a> , Lalitpur, Nepal and <a href='https://opendatanepal.com' target='_blank'>Open Data Nepal.</a>"
+  var mapInfo = textBox.append("foreignObject")
+                        .attr("class", "mapInfo")
+                        .attr("width", window.innerWidth*0.7)
+                        .attr("height", 45)
+                        .attr("x", 200)
+                        .attr("y", -5)
+                        .html(info);
+ }
+ setText2()
  setText()
